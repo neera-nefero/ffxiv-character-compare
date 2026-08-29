@@ -1,7 +1,7 @@
 [project]
 name = "ffxiv-character-compare"
 version = "0.1.0"
-description = "Add your description here"
+description = "FFXIV local tool for character comparison"
 readme = "README.md"
 authors = [
     { name = "Neera Nefero", email = "msanchez.anaya@gmail.com" }

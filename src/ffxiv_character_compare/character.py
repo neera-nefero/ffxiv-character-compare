@@ -10,10 +10,11 @@ class Character():
     minions: int # TODO: class Minions creation
     achievements: int
 
-    def __init__(self, id, name, world, mounts, minions, achievements):
-        self.id = id
-        self.name = name
-        self.world = world
-        self.mounts = mounts
-        self.minions = minions
-        self.achievements = achievements
+    def __init__(self, id, name, world, jobs, mounts, minions, achievements):
+        self.id: int = id
+        self.name: str = name
+        self.world: str = world
+        self.jobs: list[Job] = jobs
+        self.mounts: int = mounts
+        self.minions: int = minions
+        self.achievements: int = achievements

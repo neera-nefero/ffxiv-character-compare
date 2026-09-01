@@ -4,7 +4,7 @@ This tool allows to **search and select** characters, then it will compare them 
 
 ## Requirements
 - Python >=3.14
-- Uv
+- [Uv](https://docs.astral.sh/uv/)
 
 ## Py libraries added
 - requests

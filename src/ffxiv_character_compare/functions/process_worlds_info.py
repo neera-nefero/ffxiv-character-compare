@@ -23,19 +23,30 @@ def process_worlds(html_response: str) -> None:
 
 
 def extract_worlds(parsed_html: BeautifulSoup) -> list[dict[str, object]]:
-    physical_names = {}
+    physical_names: dict[int, str] = {}
+    regions: list[dict[str, object]] = []
 
     region_items = parsed_html.select(PHY_DC_FILTER)
 
     for item in region_items:
-        region_id = int(item["data-region"])
+        region_id_value = item.get("data-region")
+        if not isinstance(region_id_value, str):
+            raise ValueError("Physical data center region ID not found in the parser.")
+
+        region_id = int(region_id_value)
         region_name = item.get_text(strip=True)
 
         physical_names[region_id] = region_name
-        regions = []
+
+    if not physical_names:
+        raise ValueError("No physical data centers detected in the parser.")
 
     for region_html in parsed_html.select(REGION_FILTER):
-        region_id = int(region_html["data-region"])
+        region_id_value = region_html.get("data-region")
+        if not isinstance(region_id_value, str):
+            raise ValueError("Data center region ID not found in the parser.")
+
+        region_id = int(region_id_value)
         logical_dcs = []
 
         for logical_html in region_html.select(LOG_DC_FILTER):
@@ -79,5 +90,4 @@ def generate_worlds_cache(regions: list[dict[str, object]]) -> None:
 
 
 if __name__ == "__main__":
-    html_response = get_worlds_info()
-    process_worlds(html_response)
+    pass

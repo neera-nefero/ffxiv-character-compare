@@ -3,10 +3,6 @@
 
 from bs4 import BeautifulSoup
 
-from .get_online_character import get_job_info
-
-CHARACTER_JOB_FILTER = "h3.heading--md"
-
 def process_character_jobs(html_response: str) -> list[dict[str, object]]:
     parsed_html = BeautifulSoup(html_response, "html.parser")
 
@@ -61,6 +57,3 @@ def extract_jobs(parsed_html: BeautifulSoup) -> list[dict[str, object]]:
     if not job_types:
         raise ValueError("No character job info detected in the parser.")
     return job_types
-
-if __name__ == "__main__":
-    pass

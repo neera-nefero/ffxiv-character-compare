@@ -14,13 +14,11 @@ LOG_DC_FILTER = "li.world-dcgroup__item"
 LOG_DC_NAME_FILTER = "h2.world-dcgroup__header"
 WORLD_NAME_FILTER = ".world-list__world_name p"
 
-
 def process_worlds(html_response: str) -> None:
     parsed_html = BeautifulSoup(html_response, "html.parser")
 
     regions = extract_worlds(parsed_html)
     generate_worlds_cache(regions)
-
 
 def extract_worlds(parsed_html: BeautifulSoup) -> list[dict[str, object]]:
     physical_names: dict[int, str] = {}

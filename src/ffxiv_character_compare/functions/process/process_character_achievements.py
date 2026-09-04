@@ -2,8 +2,8 @@
 
 from bs4 import BeautifulSoup
 
-from .get_online_character import get_achievement_info
-from ..constants import NEERA_ID
+from ..get_online.get_online_character import get_achievement_info
+from ...constants import NEERA_ID
 
 
 def process_character_achievements(html_response: str | None) -> int:

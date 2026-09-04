@@ -16,8 +16,11 @@ Install dependencies:
 uv sync
 ```
 
-## Execution
-Run the project:
+## Usage
+Execute the search and compare process:
 ```bash
 uv run ffxiv-character-compare
 ```
+**Optional** arguments:
+`--help`: Prints the help manual.
+`--refresh`: Force character and world cache refresh.

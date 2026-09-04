@@ -6,7 +6,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
-from .get_online_worlds import get_worlds_info
+from ..get_online.get_online_worlds import get_worlds_info
 
 PHY_DC_FILTER = "ul.world__tab li[data-region]"
 REGION_FILTER = "div.js--tab-content[data-region]"

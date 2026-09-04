@@ -1,6 +1,6 @@
 # URLs
-LODESTONE_CHARACTER_BASE_URL = "https://na.finalfantasyxiv.com/lodestone/character/"
-LODESTONE_WORLD_BASE_URL = "https://na.finalfantasyxiv.com/lodestone/worldstatus/"
+LODESTONE_CHARACTER_BASE_URL = "https://na.finalfantasyxiv.com/lodestone/character"
+LODESTONE_WORLD_BASE_URL = "https://na.finalfantasyxiv.com/lodestone/worldstatus"
 
 # URL paths
 LODESTONE_JOB_PATH = "class_job"

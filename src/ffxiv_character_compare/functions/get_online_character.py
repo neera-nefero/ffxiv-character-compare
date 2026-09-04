@@ -15,21 +15,21 @@ def get_job_info(chr_id: int) -> str:
 
 def get_minion_info(chr_id: int) -> str | None:
     response = requests.get(f"{LODESTONE_CHARACTER_BASE_URL}/{chr_id}/{LODESTONE_MINION_PATH}/", timeout=10)
-    if response.status_code == HTTPStatus.FORBIDDEN:
+    if response.status_code == HTTPStatus.FORBIDDEN or response.status_code == HTTPStatus.NOT_FOUND:
         return None    
     response.raise_for_status()
     return response.text
 
 def get_mount_info(chr_id: int) -> str | None:
     response = requests.get(f"{LODESTONE_CHARACTER_BASE_URL}/{chr_id}/{LODESTONE_MOUNT_PATH}/", timeout=10)
-    if response.status_code == HTTPStatus.FORBIDDEN:
+    if response.status_code == HTTPStatus.FORBIDDEN or response.status_code == HTTPStatus.NOT_FOUND:
         return None
     response.raise_for_status()
     return response.text
 
 def get_achievement_info(chr_id: int) -> str | None:
     response = requests.get(f"{LODESTONE_CHARACTER_BASE_URL}/{chr_id}/{LODESTONE_ACHIEVEMENT_PATH}/", timeout=10)
-    if response.status_code == HTTPStatus.FORBIDDEN:
+    if response.status_code == HTTPStatus.FORBIDDEN or response.status_code == HTTPStatus.NOT_FOUND:
         return None    
     response.raise_for_status()
     return response.text

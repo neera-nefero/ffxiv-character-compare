@@ -2,7 +2,9 @@
 
 from bs4 import BeautifulSoup
 
-def process_character_mounts(html_response: str) -> list[dict[str, str]]:
+def process_character_mounts(html_response: str | None) -> list[dict[str, str]]:
+    if html_response is None:
+        return []
     parsed_html = BeautifulSoup(html_response, "html.parser")
 
     character_mounts = extract_mounts(parsed_html)

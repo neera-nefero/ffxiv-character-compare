@@ -1,6 +1,7 @@
 # Gets online info from the selected character
 
 import requests
+from http import HTTPStatus
 
 from ..constants import LODESTONE_CHARACTER_BASE_URL, LODESTONE_JOB_PATH, LODESTONE_MINION_PATH, LODESTONE_MOUNT_PATH, LODESTONE_ACHIEVEMENT_PATH, LODESTONE_PHYSICAL_DC_FILTER_PREFIX, LODESTONE_LOGICAL_DC_FILTER_PREFIX, LODESTONE_WORLD_FILTER_PREFIX
 
@@ -12,17 +13,23 @@ def get_job_info(chr_id: int) -> str:
     response.raise_for_status()
     return response.text
 
-def get_minion_info(chr_id: int) -> str:
+def get_minion_info(chr_id: int) -> str | None:
     response = requests.get(f"{LODESTONE_CHARACTER_BASE_URL}/{chr_id}/{LODESTONE_MINION_PATH}/", timeout=10)
+    if response.status_code == HTTPStatus.FORBIDDEN:
+        return None    
     response.raise_for_status()
     return response.text
 
-def get_mount_info(chr_id: int) -> str:
+def get_mount_info(chr_id: int) -> str | None:
     response = requests.get(f"{LODESTONE_CHARACTER_BASE_URL}/{chr_id}/{LODESTONE_MOUNT_PATH}/", timeout=10)
+    if response.status_code == HTTPStatus.FORBIDDEN:
+        return None
     response.raise_for_status()
     return response.text
 
-def get_achievement_info(chr_id: int) -> str:
+def get_achievement_info(chr_id: int) -> str | None:
     response = requests.get(f"{LODESTONE_CHARACTER_BASE_URL}/{chr_id}/{LODESTONE_ACHIEVEMENT_PATH}/", timeout=10)
+    if response.status_code == HTTPStatus.FORBIDDEN:
+        return None    
     response.raise_for_status()
     return response.text

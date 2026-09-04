@@ -2,9 +2,9 @@
 
 from bs4 import BeautifulSoup
 
-from ..constants import NEERA_ID
-
-def process_character_minions(html_response: str) -> list[dict[str, str]]:
+def process_character_minions(html_response: str | None) -> list[dict[str, str]]:
+    if html_response is None:
+        return []
     parsed_html = BeautifulSoup(html_response, "html.parser")
 
     character_minions = extract_minions(parsed_html)

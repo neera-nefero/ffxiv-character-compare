@@ -6,7 +6,10 @@ from .get_online_character import get_achievement_info
 from ..constants import NEERA_ID
 
 
-def process_character_achievements(html_response: str) -> int:
+def process_character_achievements(html_response: str | None) -> int:
+    if html_response is None:
+        return 0
+    
     parsed_html = BeautifulSoup(html_response, "html.parser")
 
     achievement_points = extract_achievement_points(parsed_html)
@@ -23,8 +26,3 @@ def extract_achievement_points(parsed_html: BeautifulSoup) -> int:
         raise ValueError("Character achievement points are not a valid number.")
 
     return int(points_text)
-
-
-if __name__ == "__main__":
-    html_response = get_achievement_info(NEERA_ID)
-    print(process_character_achievements(html_response))

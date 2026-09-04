@@ -85,7 +85,3 @@ def generate_worlds_cache(regions: list[dict[str, object]]) -> None:
 
     with cache_path.open("w", encoding="utf-8") as file:
         json.dump(json_content, file, indent=2, ensure_ascii=False)
-
-
-if __name__ == "__main__":
-    pass

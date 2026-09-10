@@ -3,10 +3,15 @@
 import requests
 from http import HTTPStatus
 
-from ...constants import LODESTONE_CHARACTER_BASE_URL, LODESTONE_JOB_PATH, LODESTONE_MINION_PATH, LODESTONE_MOUNT_PATH, LODESTONE_ACHIEVEMENT_PATH, LODESTONE_PHYSICAL_DC_FILTER_PREFIX, LODESTONE_LOGICAL_DC_FILTER_PREFIX, LODESTONE_WORLD_FILTER_PREFIX
+from ...constants import LODESTONE_CHARACTER_BASE_URL, LODESTONE_JOB_PATH, LODESTONE_MINION_PATH, LODESTONE_MOUNT_PATH, LODESTONE_ACHIEVEMENT_PATH
 
-def search_character(chr_name: str, world: str | None) -> str:
-    pass
+def search_character(chr_name: str, world: str | None = None, world_prefix: str | None = None) -> str:
+    if(world is None and world_prefix is None):
+        response = requests.get(f"{LODESTONE_CHARACTER_BASE_URL}/?q={chr_name.replace(" ", "+")}", timeout=10)
+    else:
+        response = requests.get(f"{LODESTONE_CHARACTER_BASE_URL}/?q={chr_name.replace(" ", "+")}&worldname={world_prefix}{world}", timeout=10)
+    response.raise_for_status()
+    return response.text
 
 def get_job_info(chr_id: int) -> str:
     response = requests.get(f"{LODESTONE_CHARACTER_BASE_URL}/{chr_id}/{LODESTONE_JOB_PATH}/", timeout=10)

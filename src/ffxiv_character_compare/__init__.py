@@ -1,7 +1,9 @@
 import argparse
 
+from .functions.utils import delete_folder
 from .functions.prompt.prompt_character import prompt_character
 from .functions.compare_character import compare_character
+from .constants import CACHE_FOLDER
 
 def main() -> None:
     try:
@@ -18,13 +20,17 @@ def main() -> None:
         print(f"Welcome to FFXIV Compare")
 
         args = parser.parse_args()
-        refresh = args.refresh
 
+        # Delete cache folder if prompted refresh
+        refresh = args.refresh
+        if (refresh):
+            delete_folder(CACHE_FOLDER)
+        
         print(f"Selecting character 1")
-        character_01 = prompt_character(refresh)
+        character_01 = prompt_character()
 
         print(f"Selecting character 2")
-        character_02 = prompt_character(refresh)
+        character_02 = prompt_character()
         compare_character(character_01, character_02)
 
     except KeyboardInterrupt:

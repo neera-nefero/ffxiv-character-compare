@@ -6,7 +6,7 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
-from ..get_online.get_online_worlds import get_worlds_info
+from ...constants import CACHE_FOLDER
 
 PHY_DC_FILTER = "ul.world__tab li[data-region]"
 REGION_FILTER = "div.js--tab-content[data-region]"
@@ -76,7 +76,7 @@ def extract_worlds(parsed_html: BeautifulSoup) -> list[dict[str, object]]:
 
 
 def generate_worlds_cache(regions: list[dict[str, object]]) -> None:
-    cache_path = Path("data/cache/worlds.json")
+    cache_path = Path(f"{CACHE_FOLDER}/worlds.json")
     cache_path.parent.mkdir(parents=True, exist_ok=True)
     json_content = {
         "updated_at": datetime.today().strftime("%Y-%m-%d %H:%M:%S"),
@@ -85,3 +85,6 @@ def generate_worlds_cache(regions: list[dict[str, object]]) -> None:
 
     with cache_path.open("w", encoding="utf-8") as file:
         json.dump(json_content, file, indent=2, ensure_ascii=False)
+
+if __name__ == "__main__":
+    pass

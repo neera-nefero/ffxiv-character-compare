@@ -7,9 +7,10 @@ from .process_character_jobs import process_character_jobs
 from .process_character_minions import process_character_minions
 from .process_character_mounts import process_character_mounts
 from .process_character_achievements import process_character_achievements
+from ...constants import CACHE_FOLDER
 
 def generate_chatacter_cache(chr_name: str, chr_id: int) -> None:
-    cache_path = Path(f"data/cache/characters/{chr_id}.json")
+    cache_path = Path(f"{CACHE_FOLDER}/characters/{chr_id}.json")
     cache_path.parent.mkdir(parents=True, exist_ok=True)
 
     json_content = {
@@ -25,7 +26,7 @@ def generate_chatacter_cache(chr_name: str, chr_id: int) -> None:
         json.dump(json_content, file, indent=2, ensure_ascii=False)
 
 if __name__ == "__main__":
-    #generate_chatacter_cache("Neera Nefero", 14246687)
-    #generate_chatacter_cache("No Achievements", 37322600)
-    #generate_chatacter_cache("No Mounts", 41559449)
+    generate_chatacter_cache("Neera Nefero", 38184228)
+    generate_chatacter_cache("No Achievements", 37322600)
+    generate_chatacter_cache("No Mounts", 41559449)
     pass

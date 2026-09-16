@@ -18,3 +18,6 @@ CACHE_FOLDER = "data/cache"
 
 # Debug
 NEERA_ID = 38184228
+REGION_FILTER_URL = "https://eu.finalfantasyxiv.com/lodestone/character/?q=Neera+Nefero&worldname=_region_4&classjob=&race_tribe=&blog_lang=ja&blog_lang=en&blog_lang=de&blog_lang=fr&order="
+DC_FILTER_URL = "https://eu.finalfantasyxiv.com/lodestone/character/?q=a&worldname=_dc_Dynamis&classjob=&race_tribe=&blog_lang=ja&blog_lang=en&blog_lang=de&blog_lang=fr&order="
+WORLD_FILTER_URL = "https://eu.finalfantasyxiv.com/lodestone/character/?q=a&worldname=Alpha&classjob=&race_tribe=&blog_lang=ja&blog_lang=en&blog_lang=de&blog_lang=fr&order="

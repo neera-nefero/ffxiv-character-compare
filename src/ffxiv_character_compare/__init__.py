@@ -6,6 +6,7 @@ from .functions.compare_character import compare_character
 from .constants import CACHE_FOLDER
 
 def main() -> None:
+    # NTH - Clear the console text while proceeding with the tool
     try:
         parser = argparse.ArgumentParser(
                 description="Python tool to compare 2 FFXIV character."
@@ -21,17 +22,17 @@ def main() -> None:
 
         args = parser.parse_args()
 
-        # Delete cache folder if prompted refresh
+        # Delete cache folder if refresh is selected
         refresh = args.refresh
         if (refresh):
             delete_folder(CACHE_FOLDER)
         
         print(f"Selecting character 1")
-        character_01 = prompt_character()
+        character_1 = prompt_character()
 
         print(f"Selecting character 2")
-        character_02 = prompt_character()
-        compare_character(character_01, character_02)
+        character_2 = prompt_character()
+        compare_character(character_1, character_2)
 
     except KeyboardInterrupt:
         print("\nFFXIV Compare cancelled by user.")

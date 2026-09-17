@@ -1,6 +1,6 @@
 # FFXIV Character compare
 ## Description
-This tool allows to **search and select** characters, then it will compare them according the **jobs**, **mounts**, **minions** and **achievements**. It will print the result in console.
+This tool allows to **search and select** characters, then it will compare them according the **jobs**, **mounts**, **minions** and **achievements**, printing the result in console.
 
 ## Requirements
 - Python >=3.14.
@@ -23,4 +23,4 @@ uv run ffxiv-character-compare
 ```
 **Optional** arguments:
 - `-h --help`: Prints the help manual.
-- `-r --refresh`: Force character and world cache refresh.
+- `-r --refresh`: Force data cache refresh.

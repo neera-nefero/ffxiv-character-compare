@@ -4,7 +4,6 @@ import requests
 from http import HTTPStatus
 
 from ..process.process_character_search import process_search
-# from ..process.process_character_info import process_character_jobs, process_character_minions, process_character_mounts, process_character_achievements
 from ...constants import LODESTONE_CHARACTER_BASE_URL, LODESTONE_JOB_PATH, LODESTONE_MINION_PATH, LODESTONE_MOUNT_PATH, LODESTONE_ACHIEVEMENT_PATH
 
 def search_character(chr_name: str, world: str | None = None, world_prefix: str | None = None) -> dict[str, object]:

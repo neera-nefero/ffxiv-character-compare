@@ -26,7 +26,4 @@ def generate_chatacter_cache(chr_name: str, chr_id: int) -> None:
         json.dump(json_content, file, indent=2, ensure_ascii=False)
 
 if __name__ == "__main__":
-    generate_chatacter_cache("Neera Nefero", 38184228)
-    generate_chatacter_cache("No Achievements", 37322600)
-    generate_chatacter_cache("No Mounts", 41559449)
     pass

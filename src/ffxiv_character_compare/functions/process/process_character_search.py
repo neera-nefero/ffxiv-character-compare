@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
-from ..get_online.get_online_character import search_character
 
 TOTAL_FILTER = "div.parts__total"
 ERROR_MESSAGE_FILTER = "p.form__message--error"
 ENTRY_FILTER = "div.entry:not(.more_)"
+ENTRY_LINK_FILTER = "a.entry__link"
 ENTRY_NAME_FILTER = "p.entry__name"
 ENTRY_WORLD_FILTER = "p.entry__world"
 
@@ -27,6 +27,15 @@ def extract_search_result(parsed_html: BeautifulSoup) -> dict[str, object]:
 
     results = []
     for entry in parsed_html.select(ENTRY_FILTER):
+        link_html = entry.select_one(ENTRY_LINK_FILTER)
+        if link_html is None:
+            raise ValueError("Character entry is missing link in the parser.")
+
+        href = link_html.get("href")
+        if not isinstance(href, str):
+            raise ValueError("Character entry link has no href in the parser.")
+        chr_id = int(href.rstrip("/").rsplit("/", 1)[-1])
+
         name_html = entry.select_one(ENTRY_NAME_FILTER)
         world_html = entry.select_one(ENTRY_WORLD_FILTER)
         if name_html is None or world_html is None:
@@ -34,6 +43,7 @@ def extract_search_result(parsed_html: BeautifulSoup) -> dict[str, object]:
 
         results.append(
             {
+                "chr_id": chr_id,
                 "name": name_html.get_text(strip=True),
                 "world": world_html.get_text(strip=True),
             }

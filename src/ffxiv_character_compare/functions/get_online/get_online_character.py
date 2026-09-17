@@ -1,15 +1,22 @@
-# Gets online info from the selected character
+# Request online info from the selected character
 
 import requests
 from http import HTTPStatus
 
+from ..process.process_character_search import process_search
+# from ..process.process_character_info import process_character_jobs, process_character_minions, process_character_mounts, process_character_achievements
 from ...constants import LODESTONE_CHARACTER_BASE_URL, LODESTONE_JOB_PATH, LODESTONE_MINION_PATH, LODESTONE_MOUNT_PATH, LODESTONE_ACHIEVEMENT_PATH
 
-def search_character(chr_name: str, world: str | None = None, world_prefix: str | None = None) -> str:
-    print(f"Request to: {LODESTONE_CHARACTER_BASE_URL}/?q={chr_name.replace(" ", "+")}&worldname={world_prefix}{world}")
-    response = requests.get(f"{LODESTONE_CHARACTER_BASE_URL}/?q={chr_name.replace(" ", "+")}&worldname={world_prefix}{world}", timeout=10)
+def search_character(chr_name: str, world: str | None = None, world_prefix: str | None = None) -> dict[str, object]:
+    query_name = chr_name.replace(" ", "+")
+    worldname = f"{world_prefix or ''}{world or ''}"
+
+    request_url = f"{LODESTONE_CHARACTER_BASE_URL}/?q={query_name}&worldname={worldname}"
+    response = requests.get(request_url, timeout=10)
     response.raise_for_status()
-    return response.text
+
+    search_result = process_search(response.text)
+    return search_result
 
 def get_job_info(chr_id: int) -> str:
     response = requests.get(f"{LODESTONE_CHARACTER_BASE_URL}/{chr_id}/{LODESTONE_JOB_PATH}/", timeout=10)

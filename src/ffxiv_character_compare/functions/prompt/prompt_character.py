@@ -1,7 +1,7 @@
 from .prompt_filter import prompt_filter
 from ..get_online.get_online_character import search_character
 
-def prompt_character() -> str:
+def prompt_character() -> tuple[int, str]:
     while (True):
         filter = None
         filter_prefix = None
@@ -13,12 +13,10 @@ def prompt_character() -> str:
         if search_result["total"] == 0:
             print(f"No players found with your criteria")
             continue
-        print(f"chr_id: -- {prompt_chr_list(search_result)}")
 
-
-     
-        
-    return "None"
+        chr_selected = prompt_chr_list(search_result)
+        if chr_selected[0] != -1:
+            return chr_selected
 
 def prompt_input_option() -> int:
     print(f"Do you know the exact name of the character?")
@@ -45,7 +43,8 @@ def prompt_chr_name() -> str:
             return response
         print(f"Please insert some value")
 
-def prompt_chr_list(search_result) -> int:
+def prompt_chr_list(search_result) -> tuple[int, str]:
+    # NTH - If there is only one result, give the result instantly
     list_total = len(search_result["results"])
     if (list_total < search_result["total"]):
         print(f"Showing {list_total} from total result of {search_result["total"]}")
@@ -64,9 +63,11 @@ def prompt_chr_list(search_result) -> int:
             print("Please enter a number")
             continue
         if selected_index >= 0 and selected_index < list_total:
-            return search_result["results"][selected_index]["chr_id"]
+            selected_name = search_result["results"][selected_index]["name"]
+            selected_id = search_result["results"][selected_index]["chr_id"]
+            return (selected_id, selected_name)
         if selected_index == list_total:
-            return -1
+            return (-1, "")
         print(f"Please insert a valid value")    
     
     return True
